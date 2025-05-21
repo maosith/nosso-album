@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Nosso Álbum</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+    .album {
+      margin-top: 50px;
+    }
+    .album img {
+      width: 400px;
+      height: auto;
+      border-radius: 10px;
+    }
+    .caption {
+      margin-top: 10px;
+      font-size: 18px;
+    }
+    .controls {
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Playlist -->
+  <audio id="playlist" autoplay loop>
+    <source src="musica1.mp3" type="audio/mpeg">
+    <source src="musica2.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <h1>Nosso Tempo</h1>
+
+  <!-- Álbum de fotos -->
+  <div class="album">
+    <img id="photo" src="foto1.jpg" alt="Foto do álbum">
+    <div class="caption" id="caption">Descrição da foto 1</div>
+  </div>
+
+  <div class="controls">
+    <button onclick="anterior()">Anterior</button>
+    <button onclick="proxima()">Próxima</button>
+  </div>
+
+  <script>
+    const fotos = [
+      { src: 'foto1.jpg', legenda: 'Descrição da foto 1' },
+      { src: 'foto2.jpg', legenda: 'Descrição da foto 2' },
+      { src: 'foto3.jpg', legenda: 'Descrição da foto 3' }
+    ];
+
+    let indice = 0;
+
+    function mostrarFoto() {
+      const img = document.getElementById('photo');
+      const caption = document.getElementById('caption');
+      img.src = fotos[indice].src;
+      caption.textContent = fotos[indice].legenda;
+    }
+
+    function proxima() {
+      indice = (indice + 1) % fotos.length;
+      mostrarFoto();
+    }
+
+    function anterior() {
+      indice = (indice - 1 + fotos.length) % fotos.length;
+      mostrarFoto();
+    }
+
+    // Troca automática a cada 5 segundos
+    setInterval(proxima, 5000);
+  </script>
+
+</body>
+</html>
