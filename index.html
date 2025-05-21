@@ -1,8 +1,7 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Nosso Álbum</title>
   <style>
     body {
@@ -33,22 +32,32 @@
       margin: 5px;
       cursor: pointer;
     }
+    #music-name {
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 18px;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Playlist -->
-  <audio id="playlist" autoplay loop>
-    <source src="musica1.mp3" type="audio/mpeg">
-    <source src="musica2.mp3" type="audio/mpeg">
-    Seu navegador não suporta áudio.
-  </audio>
+  <!-- Audio player sem muted -->
+  <audio id="playlist"></audio>
 
   <h1>Nosso Tempo</h1>
 
+  <!-- Botões de controle da música -->
+  <div>
+    <button onclick="tocarPausarMusica()">Tocar / Pausar Música</button>
+    <button onclick="proximaMusica()">Próxima Música</button>
+  </div>
+
+  <!-- Nome da música atual -->
+  <div id="music-name">Nenhuma música selecionada</div>
+
   <!-- Álbum de fotos -->
   <div class="album">
-    <img id="photo" src="foto1.jpg" alt="Foto do álbum">
+    <img id="photo" src="foto1.jpg" alt="Foto do álbum" />
     <div class="caption" id="caption">Descrição da foto 1</div>
   </div>
 
@@ -58,34 +67,84 @@
   </div>
 
   <script>
+    // Fotos
     const fotos = [
       { src: 'foto1.jpg', legenda: 'Descrição da foto 1' },
       { src: 'foto2.jpg', legenda: 'Descrição da foto 2' },
       { src: 'foto3.jpg', legenda: 'Descrição da foto 3' }
     ];
 
-    let indice = 0;
+    let indiceFoto = 0;
 
     function mostrarFoto() {
       const img = document.getElementById('photo');
       const caption = document.getElementById('caption');
-      img.src = fotos[indice].src;
-      caption.textContent = fotos[indice].legenda;
+      img.src = fotos[indiceFoto].src;
+      caption.textContent = fotos[indiceFoto].legenda;
     }
 
     function proxima() {
-      indice = (indice + 1) % fotos.length;
+      indiceFoto = (indiceFoto + 1) % fotos.length;
       mostrarFoto();
     }
 
     function anterior() {
-      indice = (indice - 1 + fotos.length) % fotos.length;
+      indiceFoto = (indiceFoto - 1 + fotos.length) % fotos.length;
       mostrarFoto();
     }
 
-    // Troca automática a cada 5 segundos
-    setInterval(proxima, 5000);
+    // Música
+    const musicas = [
+      { src: 'music/18.mp3', nome: '18' },
+      { src: 'music/gorgeous.mp3', nome: 'Gorgeous' },
+      { src: 'music/i love you, im sorry.mp3', nome: 'I Love You, I\'m Sorry' },
+      { src: 'music/birds.mp3', nome: 'Birds' },
+      { src: 'music/dreams.mp3', nome: 'Dreams' },
+      { src: 'music/falling.mp3', nome: 'Falling' },
+      { src: 'music/night-changes.mp3', nome: 'Night Changes' },
+      { src: 'music/pictureyou.mp3', nome: 'Picture You' },
+      { src: 'music/thatshouldbeme.mp3', nome: 'That Should Be Me' },
+      { src: 'music/youandi.mp3', nome: 'You and I' },
+      { src: 'music/youbelongwithme.mp3', nome: 'You Belong With Me' }
+    ];
+
+    let indiceMusica = 0;
+    const audio = document.getElementById('playlist');
+    const musicNameDiv = document.getElementById('music-name');
+
+    function carregarMusica() {
+      audio.src = musicas[indiceMusica].src;
+      musicNameDiv.textContent = 'Tocando: ' + musicas[indiceMusica].nome;
+    }
+
+    function tocarPausarMusica() {
+      if (audio.paused) {
+        audio.muted = false; // tira o mudo ao tocar
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
+
+    function proximaMusica() {
+      indiceMusica = (indiceMusica + 1) % musicas.length;
+      carregarMusica();
+      audio.play();
+    }
+
+    // Quando a música termina, toca a próxima automaticamente
+    audio.addEventListener('ended', () => {
+      proximaMusica();
+    });
+
+    // Inicializa foto e música
+    mostrarFoto();
+    carregarMusica();
   </script>
 
 </body>
 </html>
+
+
+
+
