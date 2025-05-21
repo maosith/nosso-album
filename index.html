@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Nosso Álbum</title>
+  <link rel="icon" href="favicon/core.png" type="image/png" />
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -57,7 +58,7 @@
 
   <!-- Álbum de fotos -->
   <div class="album">
-    <img id="photo" src="foto1.jpg" alt="Foto do álbum" />
+    <img id="photo" src="pics/pic1.jpeg" alt="Foto do álbum" />
     <div class="caption" id="caption">Descrição da foto 1</div>
   </div>
 
@@ -67,11 +68,47 @@
   </div>
 
   <script>
-    // Fotos
     const fotos = [
-      { src: 'foto1.jpg', legenda: 'Descrição da foto 1' },
-      { src: 'foto2.jpg', legenda: 'Descrição da foto 2' },
-      { src: 'foto3.jpg', legenda: 'Descrição da foto 3' }
+      {
+        src: 'pics/pic1.jpeg',
+        legenda: 'Posso começar aqui dizendo que sempre fomos uma família,<br>você sempre fez parte da minha vida, eu não lembro dela sem você.'
+      },
+      {
+        src: 'pics/pic2.jpeg',
+        legenda: 'Aquele dia foi incrível,<br>a gente riu tanto que até choramos.'
+      },
+      {
+        src: 'pics/pic3.jpeg',
+        legenda: 'Mais uma memória que nunca vou esquecer.<br>Você sempre ali comigo.'
+      },
+      {
+        src: 'pics/pic4.jpeg',
+        legenda: 'Seu primeiro dia na faculdade!.<br>Você sempre foi meu orgulho, e sempre será.'
+      },
+      {
+        src: 'pics/pic5.jpeg',
+        legenda: 'Nós dois fazendo graça era o que completava meu dia.<br>Era o suficiente pra fazer meu dia feliz.'
+      },
+      {
+        src: 'pics/pic6.jpeg',
+        legenda: 'Te olhar e saber que estávamos bem,<br>era tudo o que eu precisava.'
+      },
+      {
+        src: 'pics/pic7.jpeg',
+        legenda: 'Essa foto me faz lembrar<br>como tudo era mais bonito com você.'
+      },
+      {
+        src: 'pics/pic8.jpeg',
+        legenda: 'Se eu pudesse viver de novo,<br>escolheria estar contigo em cada momento.'
+      },
+      {
+        src: 'pics/pic9.jpeg',
+        legenda: 'Cada detalhe dessa foto me faz sorrir.<br>Você sempre foi meu lar.'
+      },
+      {
+        src: 'pics/pic10.jpeg',
+        legenda: 'Nosso amor em um pequeno álbum.<br>Sempre vou amar você.'
+      }
     ];
 
     let indiceFoto = 0;
@@ -80,7 +117,7 @@
       const img = document.getElementById('photo');
       const caption = document.getElementById('caption');
       img.src = fotos[indiceFoto].src;
-      caption.textContent = fotos[indiceFoto].legenda;
+      caption.innerHTML = fotos[indiceFoto].legenda;
     }
 
     function proxima() {
@@ -119,7 +156,7 @@
 
     function tocarPausarMusica() {
       if (audio.paused) {
-        audio.muted = false; // tira o mudo ao tocar
+        audio.muted = false;
         audio.play();
       } else {
         audio.pause();
@@ -132,18 +169,17 @@
       audio.play();
     }
 
-    // Quando a música termina, toca a próxima automaticamente
     audio.addEventListener('ended', () => {
       proximaMusica();
     });
 
-    // Inicializa foto e música
     mostrarFoto();
     carregarMusica();
   </script>
 
 </body>
 </html>
+
 
 
 
